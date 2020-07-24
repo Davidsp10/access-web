@@ -15,17 +15,17 @@ export class UuidService {
         }
 
     getUuidList():Observable<any> {
-        return this._http.get(this.url+"/uuid");
+        return this._http.get(this.url+"/uid");
     }
 
     save(uuid: Uuid):Observable<any> {
         let params = JSON.stringify(uuid);
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this._http.post(this.url+"/uuid/save", params, { headers : headers});
+        return this._http.post(this.url+"/uid/save", params, { headers : headers});
     }
 
     delete(id: Number) : Observable<any> {
-        return this._http.delete(this.url+"/uuid/delete/"+id);
+        return this._http.delete(this.url+"/uid/delete/"+id);
     }
     
 }
