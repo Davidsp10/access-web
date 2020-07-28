@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {UuidService} from '../../shared/services/uuid.service';
+import {AuthService} from '../../shared/services/auth.service'
 import {Uuid} from '../../shared/models/uuid';
 import { MenuItem, MessageService, ConfirmationService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -36,7 +38,9 @@ export class HomeComponent implements OnInit {
   constructor(
     private _uuidService: UuidService,
     private _messageService: MessageService,
-    private _confirmationService: ConfirmationService
+    private _confirmationService: ConfirmationService,
+    private _authService: AuthService,
+    private _router: Router
   ) { 
     
   }
@@ -55,6 +59,11 @@ export class HomeComponent implements OnInit {
       {label: "Habilitar", icon: 'pi pi-fw pi-pencil', command: () => this.showUpdateDialog()},
       {label: "Eliminar", icon: 'pi pi-fw pi-trash', command: () => this.delete() }
     ]
+    //LOGOUT STEP 1
+    if(!this._authService.isAuthenticated()){
+      console.log("No estás autenticado!");
+      this._router.navigate(['']);
+    }
   }
 
   getAll() {
@@ -148,4 +157,13 @@ export class HomeComponent implements OnInit {
         }
       )
     }
+
+    //LOGOUT STEP 2
+    //LOGOUT STEP 3 en authService
+    logout(): void {
+      this._authService.logout();
+      console.log("Has cerrado sesión con éxito");
+      this._router.navigate[('')]
+    }
+
 }

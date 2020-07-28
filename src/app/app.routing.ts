@@ -3,9 +3,11 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from "./pages/home/home.component";
+import { LoginComponent } from "./pages/login/login.component";
 
 const appRoutes: Routes = [
-    {path: '', component: HomeComponent}
+    {path: '', component: LoginComponent},
+    {path: 'home', component: HomeComponent}
 ];
 
 export const appRoutingProviders : any [] = [];
