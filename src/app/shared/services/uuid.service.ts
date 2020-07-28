@@ -27,7 +27,7 @@ export class UuidService {
     update(uuid: Uuid):Observable<any> {
         let params = JSON.stringify(uuid);
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this._http.post(this.url+"/uid/update/", params, { headers : headers});
+        return this._http.put(this.url+"/uid/update", params, { headers : headers});
     }
 
     delete(id: Number) : Observable<any> {

@@ -70,6 +70,7 @@ export class HomeComponent implements OnInit {
   }
 
   showSaveDialog() {
+    this.uuid = new Uuid(null, null, null, null, null);
     this.displaySaveDialog = true;
   }
 
@@ -133,11 +134,13 @@ export class HomeComponent implements OnInit {
     }
 
     update() {
+      this.selectedUuid.enabled = this.checked;
       this._uuidService.update(this.selectedUuid).subscribe(
         response => {
           this._messageService.add({severity: 'success', summary: "Resultado", detail: "Se actualizó el registro correctamente."});
           let index = this.uuidList.findIndex((e) => e.identifier == response.identifier);
           this.uuidList[index] = response;
+          this.displayUpdateDialog = false;
         },
         error => {
           console.log(error);
