@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {UuidService} from '../../shared/services/uuid.service';
 import {Uuid} from '../../shared/models/uuid';
 import { MenuItem, MessageService, ConfirmationService } from 'primeng/api';
-import printPDF from './print';
 
 @Component({
   selector: 'app-home',
@@ -17,17 +16,21 @@ export class HomeComponent implements OnInit {
   cols: any[];
   items: MenuItem[];
   displaySaveDialog: boolean = false;
+  displayUpdateDialog: boolean = false;
+  checked: Boolean = true;
   uuid: Uuid = {
     identifier: null,
     name: null,
     uuid: null,
-    creationDate: null
+    creationDate: null,
+    enabled: null
   };
   selectedUuid: Uuid = {
     identifier: null,
     name: null,
     uuid: null,
-    creationDate: null
+    creationDate: null,
+    enabled: null
   }
 
   constructor(
@@ -44,10 +47,12 @@ export class HomeComponent implements OnInit {
       {field: "identifier", header: "ID"},
       {field: "name", header: "Nombre"},
       {field: "uuid", header: "UID"},
-      {field: "creationDate", header: "Fecha"}
+      {field: "enabled", header: "Habilitado"},
+      {field: "creationDate", header: "Fecha de creación"}
     ]
     this.items = [
       {label: "Nuevo", icon: 'pi pi-fw pi-plus', command: () => this.showSaveDialog()},
+      {label: "Habilitar", icon: 'pi pi-fw pi-pencil', command: () => this.showUpdateDialog()},
       {label: "Eliminar", icon: 'pi pi-fw pi-trash', command: () => this.delete() }
     ]
   }
@@ -110,11 +115,34 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  deletedObject(id:Number) {
-    let index = this.uuidList.findIndex((e) => e.identifier == id);
-    if(index != -1) {
-      this.uuidList.splice(index, 1)
-    }
-  } 
+    deletedObject(id:Number) {
+      let index = this.uuidList.findIndex((e) => e.identifier == id);
+      if(index != -1) {
+        this.uuidList.splice(index, 1)
+      }
+    } 
 
+    showUpdateDialog() {
+      if(this.selectedUuid != null && this.selectedUuid.identifier != null) {
+        this.uuid = this.selectedUuid;
+        this.checked = this.uuid.enabled;
+        this.displayUpdateDialog = true;
+      } else {
+        this._messageService.add({severity: 'warn', summary: "Advertencia!", detail: "Por favor seleccione un registro."});
+      }
+    }
+
+    update() {
+      this._uuidService.update(this.selectedUuid).subscribe(
+        response => {
+          this._messageService.add({severity: 'success', summary: "Resultado", detail: "Se actualizó el registro correctamente."});
+          let index = this.uuidList.findIndex((e) => e.identifier == response.identifier);
+          this.uuidList[index] = response;
+        },
+        error => {
+          console.log(error);
+          this._messageService.add({severity: 'error', summary: "Resultado", detail: "Ocurrió un error."});
+        }
+      )
+    }
 }

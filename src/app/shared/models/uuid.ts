@@ -7,7 +7,8 @@ export class Uuid {
         public identifier: Number,
         public name: String,
         public uuid: String,
-        public creationDate: any
+        public creationDate: any,
+        public enabled: Boolean
         
     )
     {

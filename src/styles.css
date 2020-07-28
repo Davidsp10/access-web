@@ -25,7 +25,7 @@ img {
     max-height: 100%;
 }
 
-.uuid-table > div > div{
+.uuid-table > div > div:first-child{
     background-color: var(--secondBlue) !important;
 }
 
@@ -99,6 +99,14 @@ img {
     margin: 0 auto;
 }
 
+.uuid-table > div > div:first-child{
+    border-radius: 10px 10px 0px 0px;
+}
+
+.uuid-table > div > div:nth-child(2) > div{
+    border-radius: 0px 0px 10px 10px;
+}
+
 .uuid-table > div > div > span{
     font-size: 1.2rem;
 }
@@ -107,3 +115,34 @@ img {
     font-size: 1.2rem;
 }
 
+/****************************/
+
+td.green-circle  > div, td.gray-circle > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.green-circle > div > span{
+    display: block; 
+    position: relative;
+    height: 15px;
+    width: 15px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: #12F329;
+}
+
+.gray-circle > div > span{
+    display: block;
+    position: relative;
+    height: 15px !important;
+    width: 15px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: rgb(165, 167, 165);
+}

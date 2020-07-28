@@ -19,6 +19,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {InputSwitchModule} from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     ButtonModule,
     ToastModule,
     ConfirmDialogModule,
+    InputSwitchModule,
     routing
   ],
   providers: [appRoutingProviders],
