@@ -5,7 +5,7 @@
 
   <p-panel class="uuid-table" header="Lista de UID´s guardados">
     <div>
-      <p-menubar class="menu-uuid-table" [model]="items" ></p-menubar>
+      <p-menubar *ngIf="_authService.hasRole('ROLE_ADMIN')" class="menu-uuid-table" [model]="items" ></p-menubar>
     </div>
 
     <p-table #dt [value]="uuidList" [responsive]="true" [columns]="cols" [paginator]="true" 
@@ -34,7 +34,7 @@
         </tr>
       </ng-template>
     </p-table>
-    <button type="button" (click)="logout()" pButton icon="pi pi-power-off" label="Cerrar Sesión"></button>
+    <button type="button" class="logout" (click)="logout()" pButton icon="pi pi-power-off" label="Cerrar Sesión"></button>
   </p-panel>
 
   <p-dialog header="Nuevo UID" class="save-modal" [responsive]="true" [(visible)]="displaySaveDialog" [modal]=true>

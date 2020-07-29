@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [UuidService, MessageService, ConfirmationService]
+  providers: [UuidService, MessageService, ConfirmationService, AuthService]
 })
 
 export class HomeComponent implements OnInit {

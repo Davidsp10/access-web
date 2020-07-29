@@ -42,7 +42,12 @@ img {
 }
 
 .before-delete > div > div > div:first-child{
-    background-color: var(--secondBlue) !important;
+    background-color: red !important;
+}
+
+.before-delete > div > div > div:nth-child(3) > button {
+	background-color: red !important;
+	border: none;
 }
 
 .before-delete > div > div > div:first-child > span{
@@ -324,6 +329,13 @@ a:hover{
 	background-position: right;
 }
 
+.logout{
+	margin-top: 10px !important;
+}
+
+span.pi-power-off + span {
+	margin-left: 5px;
+}
 
 @media screen and (max-width: 1050px){
 	.container{

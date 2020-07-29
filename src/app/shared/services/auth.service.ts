@@ -45,10 +45,10 @@ export class AuthService {
         let headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded', 
                                              'Authorization': 'Basic '+ credentials});
         let params = new URLSearchParams();
-        params.set('grant-types', 'password');
+        params.set('grant_type', 'password');
         params.set('username', user.username);
         params.set('password', user.password);
-        console.log(params);
+        console.log(params.toString(), headers);
         return this._http.post<any>(this.url+"/oauth/token", params.toString(), {headers: headers});
     }
 
@@ -83,11 +83,20 @@ export class AuthService {
         return false;
     }
 
+    //HIDDENBUTTONS STEP 1
+    hasRole(role: string): boolean {
+        if(this.user.roles.includes(role)) {
+            return true;
+        }
+        return false;
+    }
+
     //LOGOUT STEP 3
     logout(): void {
         this._token = null;
         this._user = null;
         sessionStorage.clear();
+        this.router.navigate([''])
     }
 
 }

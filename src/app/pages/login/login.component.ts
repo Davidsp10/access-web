@@ -6,7 +6,8 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [AuthService]
 })
 
 export class LoginComponent implements OnInit {
@@ -26,20 +27,18 @@ export class LoginComponent implements OnInit {
     });
 
     //CHECK_SESSION STEP 2
-    if(this.authService.isAuthenticated()){
-      console.log("Hola, ya estás autenticado!");
-      this._router.navigate(['/home']);
-    }
+    // if(this.authService.isAuthenticated()){
+    //   console.log("Hola, ya estás autenticado!");
+    //   this._router.navigate(['/home']);
+    // }
   }
 
   addcl(e) {
-    console.log(e);
     let parent = e.target.parentNode.parentNode;
     parent.classList.add("focus");
   }
 
   remcl(e) {
-    console.log(e);
     let parent = e.target.parentNode.parentNode;
     if(e.value == ""){
       parent.classList.remove("focus");
