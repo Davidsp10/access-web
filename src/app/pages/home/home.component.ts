@@ -90,8 +90,9 @@ export class HomeComponent implements OnInit {
     this._uuidService.save(this.uuid).subscribe(
       response => {
         console.log(response);
-        let uuid = response as Uuid;
-        this.uuidList.push(uuid);
+        //let uuid = response as Uuid;
+        //this.uuidList.push(uuid);
+        this.getAll();
         this._messageService.add({severity: 'success', summary: 'Resultado', detail: 'Se guardaron los datos correctamente'});
         this.displaySaveDialog = false;
       },
@@ -114,6 +115,7 @@ export class HomeComponent implements OnInit {
             response => {
               this._messageService.add({severity: 'success', summary: "Resultado", detail: "Se eliminó el registro correctamente."});
               this.deletedObject(response.identifier);
+              this.getAll();
             },
             error => {
               console.log(error);
