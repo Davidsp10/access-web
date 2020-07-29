@@ -4,6 +4,7 @@ import {AuthService} from '../../shared/services/auth.service'
 import {Uuid} from '../../shared/models/uuid';
 import { MenuItem, MessageService, ConfirmationService } from 'primeng/api';
 import { Router } from '@angular/router';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-home',
@@ -61,6 +62,7 @@ export class HomeComponent implements OnInit {
     ]
     //LOGOUT STEP 1
     if(!this._authService.isAuthenticated()){
+      swal('Error!', 'No has iniciado sesión', 'error');
       console.log("No estás autenticado!");
       this._router.navigate(['']);
     }
@@ -162,8 +164,8 @@ export class HomeComponent implements OnInit {
     //LOGOUT STEP 3 en authService
     logout(): void {
       this._authService.logout();
+      swal('Logout', 'Has cerrado sesión con éxito', 'success');
       console.log("Has cerrado sesión con éxito");
-      this._router.navigate[('')]
     }
 
 }

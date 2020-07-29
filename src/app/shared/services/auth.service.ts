@@ -96,7 +96,7 @@ export class AuthService {
         this._token = null;
         this._user = null;
         sessionStorage.clear();
-        this.router.navigate([''])
+        this.router.navigate(['']);
     }
 
 }

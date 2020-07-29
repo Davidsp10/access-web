@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
 import {AuthService} from '../../shared/services/auth.service';
 import {Router} from '@angular/router';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-login',
@@ -27,10 +28,11 @@ export class LoginComponent implements OnInit {
     });
 
     //CHECK_SESSION STEP 2
-    // if(this.authService.isAuthenticated()){
-    //   console.log("Hola, ya estás autenticado!");
-    //   this._router.navigate(['/home']);
-    // }
+    if(this.authService.isAuthenticated()){
+      console.log("Hola, ya estás autenticado!");
+      swal('Advertencia!', 'Ya estás autenticado', 'warning');
+      this._router.navigate(['/home']);
+    }
   }
 
   addcl(e) {
@@ -49,6 +51,7 @@ export class LoginComponent implements OnInit {
     console.log(this.user);
     if(this.user.username == null || this.user.password == null){
       console.log("Faltan datos");
+      swal('¡Advertencia!', 'Faltan datos por completar', 'warning');
       return;
     }
 
@@ -60,12 +63,15 @@ export class LoginComponent implements OnInit {
         this.authService.saveUser(response.access_token);
         this.authService.saveToken(response.access_token);
         let user = this.authService.user;
-        this._router.navigate(['/home']);  
         console.log(`Hola ${user.username}, iniciaste sesión con éxito!`);
+        swal('Login', `Hola ${user.username}, iniciaste sesión con éxito!`, 'success');
+        this._router.navigate(['/home']);  
+        
       },
       error => {
         if(error.status == 400) {
           console.log("Usuario o clave incorrecta!");
+          swal('¡Error!', 'Usuario o clave incorrecta(s)', 'error');
         }
       });
   }
